@@ -32,55 +32,62 @@
       </div>
     </section>
 
-    <ul class="post-list">
-      <li class="post-item memory-log" data-category="memory-log">
-        <a href="post-2025-05-24.html">
-          <span class="post-date">may 24, 2025</span>
-          <span class="post-title">Sonnet 15 and Visual Memory</span>
-          <span class="post-category">memory log</span>
-        </a>
-      </li>
-      <li class="post-item ot" data-category="ot">
-        <a href="post-2025-05-23-ai.html">
-          <span class="post-date">may 23, 2025</span>
-          <span class="post-title">AI as Memory Palace</span>
-          <span class="post-category">ot</span>
-        </a>
-      </li>
-      <li class="post-item memory-log" data-category="memory-log">
-        <a href="post-2025-05-23.html">
-          <span class="post-date">may 23, 2025</span>
-          <span class="post-title">Starting things over and over</span>
-          <span class="post-category">memory log</span>
-        </a>
-      </li>
-      <li class="post-item nt" data-category="nt">
-        <a href="post-2025-05-22-analysis.html">
-          <span class="post-date">may 22, 2025</span>
-          <span class="post-title">The Fourteen-Line Architecture</span>
-          <span class="post-category">nt</span>
-        </a>
-      </li>
-      <li class="post-item memory-log" data-category="memory-log">
-        <a href="post-2025-05-22.html">
-          <span class="post-date">may 22, 2025</span>
-          <span class="post-title">How to memorize long things</span>
-          <span class="post-category">memory log</span>
-        </a>
-      </li>
+    <!-- Posts will be loaded here -->
+    <ul class="post-list" id="post-list">
+      <!-- Dynamic content -->
     </ul>
   </main>
 
   <script>
-    // Simple category filtering
+    let allPosts = [];
+    let currentCategory = 'memory-log';
+
+    // Load posts from JSON
+    async function loadPosts() {
+      try {
+        const response = await fetch('posts.json');
+        allPosts = await response.json();
+        renderPosts(currentCategory);
+      } catch (error) {
+        console.error('Failed to load posts:', error);
+      }
+    }
+
+    // Render posts based on category
+    function renderPosts(category) {
+      const postList = document.getElementById('post-list');
+      const filteredPosts = category === 'all' ? allPosts : allPosts.filter(post => post.category === category);
+      
+      postList.innerHTML = filteredPosts.map(post => `
+        <li class="post-item ${post.category}" data-category="${post.category}">
+          <a href="${post.filename}">
+            <span class="post-date">${formatDate(post.date)}</span>
+            <span class="post-title">${post.title}</span>
+            <span class="post-category">${post.category}</span>
+          </a>
+        </li>
+      `).join('');
+    }
+
+    // Format date from YYYY-MM-DD to "month day, year"
+    function formatDate(dateStr) {
+      const date = new Date(dateStr + 'T00:00:00');
+      return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }).toLowerCase();
+    }
+
+    // Category filtering
     const categoryLinks = document.querySelectorAll('.category-link');
-    const postItems = document.querySelectorAll('.post-item');
     const descriptions = document.querySelectorAll('.description');
 
     categoryLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const category = link.dataset.category;
+        currentCategory = category;
         
         // Update active nav link
         categoryLinks.forEach(l => l.classList.remove('active'));
@@ -90,30 +97,13 @@
         descriptions.forEach(d => d.classList.remove('active'));
         document.getElementById(`desc-${category}`).classList.add('active');
         
-        // Filter posts
-        postItems.forEach(item => {
-          if (category === 'all' || item.dataset.category === category) {
-            item.style.display = 'block';
-          } else {
-            item.style.display = 'none';
-          }
-        });
+        // Re-render posts
+        renderPosts(category);
       });
     });
-document.addEventListener('DOMContentLoaded', function() {
-  // Trigger the default filtering on page load
-  const defaultActiveLink = document.querySelector('.category-link.active');
-  if (defaultActiveLink) {
-    const category = defaultActiveLink.dataset.category;
-    postItems.forEach(item => {
-      if (category === 'all' || item.dataset.category === category) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  }
-});
+
+    // Load posts on page load
+    document.addEventListener('DOMContentLoaded', loadPosts);
   </script>
 </body>
 </html>
