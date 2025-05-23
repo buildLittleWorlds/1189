@@ -1,38 +1,11 @@
 [
   {
-    "date": "2025-05-23",
-    "title": "genesis 1",
+    "date": "Cycle 1, Day 1",
+    "title": "genesis",
     "category": "memory-log",
-    "filename": "post-2025-05-23.html"
-  },
-  {
-    "date": "2025-05-24",
-    "title": "Sonnet 15 and Visual Memory",
-    "category": "memory-log",
-    "filename": "post-2025-05-24.html"
-  },
-  {
-    "date": "2025-05-23",
-    "title": "AI as Memory Palace",
-    "category": "ot",
-    "filename": "post-2025-05-23-ai.html"
-  },
-  {
-    "date": "2025-05-23",
-    "title": "Starting things over and over",
-    "category": "memory-log",
-    "filename": "post-2025-05-23.html"
-  },
-  {
-    "date": "2025-05-22",
-    "title": "The Fourteen-Line Architecture",
-    "category": "nt",
-    "filename": "post-2025-05-22-analysis.html"
-  },
-  {
-    "date": "2025-05-22",
-    "title": "How to memorize long things",
-    "category": "memory-log",
-    "filename": "post-2025-05-22.html"
+    "filename": "post-1-1.html",
+    "cycle": 1,
+    "day": 1,
+    "sortkey": "1-1"
   }
 ]
