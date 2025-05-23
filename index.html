@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=450">
+  <title>1189</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>1189</h1>
+    
+    <nav class="category-nav">
+      <a href="#memory-log" class="category-link active" data-category="memory-log">memory log</a>
+      <a href="#ot" class="category-link" data-category="ot">ot</a>
+      <a href="#nt" class="category-link" data-category="nt">nt</a>
+      <a href="#all" class="category-link" data-category="all">all</a>
+    </nav>
+
+    <section class="category-description">
+      <div id="desc-memory-log" class="description active">
+        daily notes on memorizing
+      </div>
+      <div id="desc-ot" class="description">
+        ot chapters
+      </div>
+      <div id="desc-nt" class="description">
+        nt chapters
+      </div>
+      <div id="desc-all" class="description">
+        all posts
+      </div>
+    </section>
+
+    <ul class="post-list">
+      <li class="post-item memory-log" data-category="memory-log">
+        <a href="post-2025-05-24.html">
+          <span class="post-date">may 24, 2025</span>
+          <span class="post-title">Sonnet 15 and Visual Memory</span>
+          <span class="post-category">memory log</span>
+        </a>
+      </li>
+      <li class="post-item ot" data-category="ot">
+        <a href="post-2025-05-23-ai.html">
+          <span class="post-date">may 23, 2025</span>
+          <span class="post-title">AI as Memory Palace</span>
+          <span class="post-category">ot</span>
+        </a>
+      </li>
+      <li class="post-item memory-log" data-category="memory-log">
+        <a href="post-2025-05-23.html">
+          <span class="post-date">may 23, 2025</span>
+          <span class="post-title">Starting things over and over</span>
+          <span class="post-category">memory log</span>
+        </a>
+      </li>
+      <li class="post-item nt" data-category="nt">
+        <a href="post-2025-05-22-analysis.html">
+          <span class="post-date">may 22, 2025</span>
+          <span class="post-title">The Fourteen-Line Architecture</span>
+          <span class="post-category">nt</span>
+        </a>
+      </li>
+      <li class="post-item memory-log" data-category="memory-log">
+        <a href="post-2025-05-22.html">
+          <span class="post-date">may 22, 2025</span>
+          <span class="post-title">How to memorize long things</span>
+          <span class="post-category">memory log</span>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    // Simple category filtering
+    const categoryLinks = document.querySelectorAll('.category-link');
+    const postItems = document.querySelectorAll('.post-item');
+    const descriptions = document.querySelectorAll('.description');
+
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const category = link.dataset.category;
+        
+        // Update active nav link
+        categoryLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        
+        // Update description
+        descriptions.forEach(d => d.classList.remove('active'));
+        document.getElementById(`desc-${category}`).classList.add('active');
+        
+        // Filter posts
+        postItems.forEach(item => {
+          if (category === 'all' || item.dataset.category === category) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+document.addEventListener('DOMContentLoaded', function() {
+  // Trigger the default filtering on page load
+  const defaultActiveLink = document.querySelector('.category-link.active');
+  if (defaultActiveLink) {
+    const category = defaultActiveLink.dataset.category;
+    postItems.forEach(item => {
+      if (category === 'all' || item.dataset.category === category) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+});
+  </script>
+</body>
+</html>
