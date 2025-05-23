@@ -61,22 +61,12 @@
       postList.innerHTML = filteredPosts.map(post => `
         <li class="post-item ${post.category}" data-category="${post.category}">
           <a href="${post.filename}">
-            <span class="post-date">${formatDate(post.date)}</span>
+            <span class="post-date">cycle ${post.cycle}, day ${post.day}</span>
             <span class="post-title">${post.title}</span>
             <span class="post-category">${post.category}</span>
           </a>
         </li>
       `).join('');
-    }
-
-    // Format date from YYYY-MM-DD to "month day, year"
-    function formatDate(dateStr) {
-      const date = new Date(dateStr + 'T00:00:00');
-      return date.toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      }).toLowerCase();
     }
 
     // Category filtering
