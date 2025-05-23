@@ -12,20 +12,20 @@
     
     <nav class="category-nav">
       <a href="#memory-log" class="category-link active" data-category="memory-log">memory log</a>
-      <a href="#ot" class="category-link" data-category="ot">ot</a>
-      <a href="#nt" class="category-link" data-category="nt">nt</a>
+      <a href="#commentary" class="category-link" data-category="commentary">commentary</a>
+      <a href="#ai" class="category-link" data-category="ai">ai</a>
       <a href="#all" class="category-link" data-category="all">all</a>
     </nav>
 
     <section class="category-description">
       <div id="desc-memory-log" class="description active">
-        daily notes on memorizing
+        daily notes on memorizing 9 words from 40 chapters (30-day cycles)
       </div>
-      <div id="desc-ot" class="description">
-        ot chapters
+      <div id="desc-commentary" class="description">
+        reflections on scripture
       </div>
-      <div id="desc-nt" class="description">
-        nt chapters
+      <div id="desc-ai" class="description">
+        AI integration in the memorization journey
       </div>
       <div id="desc-all" class="description">
         all posts
@@ -58,15 +58,39 @@
       const postList = document.getElementById('post-list');
       const filteredPosts = category === 'all' ? allPosts : allPosts.filter(post => post.category === category);
       
-      postList.innerHTML = filteredPosts.map(post => `
-        <li class="post-item ${post.category}" data-category="${post.category}">
-          <a href="${post.filename}">
-            <span class="post-date">cycle ${post.cycle}, day ${post.day}</span>
-            <span class="post-title">${post.title}</span>
-            <span class="post-category">${post.category}</span>
-          </a>
-        </li>
-      `).join('');
+      // Sort posts: memory-log by cycle/day descending, others by date descending
+      filteredPosts.sort((a, b) => {
+        if (a.category === 'memory-log' && b.category === 'memory-log') {
+          // Sort by cycle descending, then by day descending
+          if (a.cycle !== b.cycle) return b.cycle - a.cycle;
+          return b.day - a.day;
+        }
+        // For other categories, sort by timestamp descending (newest first)
+        return new Date(b.timestamp || 0) - new Date(a.timestamp || 0);
+      });
+      
+      postList.innerHTML = filteredPosts.map(post => {
+        let dateDisplay = '';
+        if (post.category === 'memory-log') {
+          dateDisplay = `cycle ${post.cycle}, day ${post.day}`;
+        } else {
+          dateDisplay = new Date(post.timestamp).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          });
+        }
+        
+        return `
+          <li class="post-item ${post.category}" data-category="${post.category}">
+            <a href="${post.filename}">
+              <span class="post-date">${dateDisplay}</span>
+              <span class="post-title">${post.title}</span>
+              <span class="post-category">${post.category}</span>
+            </a>
+          </li>
+        `;
+      }).join('');
     }
 
     // Category filtering

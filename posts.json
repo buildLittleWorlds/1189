@@ -1,11 +1,11 @@
 [
   {
-    "date": "Cycle 1, Day 1",
-    "title": "genesis",
+    "title": "start genesis",
     "category": "memory-log",
-    "filename": "post-1-1.html",
+    "filename": "1-1.html",
     "cycle": 1,
     "day": 1,
+    "chapters": "Genesis 1-40",
     "sortkey": "1-1"
   }
 ]

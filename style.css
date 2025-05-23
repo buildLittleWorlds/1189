@@ -1,4 +1,4 @@
-/* Minimalist for Misinquiry — Soft Light Version */
+/* Minimalist for Bible Memorization — Soft Light Version */
 
 html, body {
   background: #f8f9fa;
@@ -95,11 +95,11 @@ h1 {
   border-left-color: #a8d5ba;
 }
 
-.post-item.ot {
+.post-item.commentary {
   border-left-color: #a8c8e1;
 }
 
-.post-item.nt {
+.post-item.ai {
   border-left-color: #e1a8c8;
 }
 
@@ -170,17 +170,18 @@ article {
   background: #f5f5f5;
   border-radius: 6px;
   border-left: 4px solid #ccc;
+  text-align: left;
 }
 
 .post-meta.memory-log {
   border-left-color: #a8d5ba;
 }
 
-.post-meta.ot {
+.post-meta.commentary {
   border-left-color: #a8c8e1;
 }
 
-.post-meta.nt {
+.post-meta.ai {
   border-left-color: #e1a8c8;
 }
 
@@ -202,6 +203,13 @@ article {
 .post-meta .date {
   font-size: 0.9em;
   color: #888;
+  margin-bottom: 0.3em;
+}
+
+.post-meta .chapters {
+  font-size: 0.85em;
+  color: #666;
+  font-style: italic;
 }
 
 /* Content Styling */
@@ -218,32 +226,40 @@ article ul li {
   position: relative;
 }
 
-/* Special styling for nt analytical content */
-.analysis-note {
-  background: #fafafa;
-  border-left: 4px solid #e1a8c8;
+/* Special content blocks */
+.memory-note {
+  background: #f0f8f0;
+  border-left: 4px solid #a8d5ba;
   padding: 1em;
   margin: 1.5em 0;
-  font-style: italic;
 }
 
-.analysis-note::before {
-  content: "※ ";
-  color: #e1a8c8;
+.memory-note::before {
+  content: "📖 ";
   font-weight: bold;
 }
 
-/* ot AI content */
-.ai-insight {
+.commentary-insight {
   background: #f8fafc;
   border-left: 4px solid #a8c8e1;
   padding: 1em;
   margin: 1.5em 0;
 }
 
+.commentary-insight::before {
+  content: "💭 ";
+  font-weight: bold;
+}
+
+.ai-insight {
+  background: #faf8fc;
+  border-left: 4px solid #e1a8c8;
+  padding: 1em;
+  margin: 1.5em 0;
+}
+
 .ai-insight::before {
-  content: "⚡ ";
-  color: #a8c8e1;
+  content: "🤖 ";
   font-weight: bold;
 }
 

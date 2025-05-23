@@ -1,1 +1,16 @@
+# Scripts
 new-post.sh
+
+# Development
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+backup/
+
+# Personal notes
+personal/
+drafts/
